@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Subjail Kannur – Lock Up Board</title>
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;width:100%;height:100%;background:#061f3d;overflow:hidden}
+  body{font-family:Arial,Helvetica,sans-serif}
+  .screen{width:100vw;height:100vh;display:grid;place-items:center;background:#061f3d}
+  .board{position:relative;width:min(100vw, calc(100vh * 1672 / 940));height:min(100vh, calc(100vw * 940 / 1672));aspect-ratio:1672/940;overflow:hidden;background:#fff}
+  .board img{position:absolute;inset:0;width:100%;height:100%;display:block;user-select:none;pointer-events:none}
+
+  /* Dynamic areas intentionally sit over the matching regions of the reference design. */
+  .dynamic{position:absolute;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:900;line-height:1;color:#063b70;white-space:nowrap}
+  .date-value{left:82.0%;top:8.2%;width:14.7%;height:8.5%;font-size:clamp(12px,2.05vw,36px);color:#fff;background:#063b70}
+
+  .number{top:55.7%;height:14.8%;font-size:clamp(34px,7.0vw,116px);letter-spacing:-.04em}
+  .total{left:27.5%;width:16.8%;color:#063b70;background:#edf4fb}
+  .cp{left:46.8%;width:13.0%;color:#087d49;background:#edf8f2}
+  .rp{left:65.9%;width:13.0%;color:#a95200;background:#fff8ed}
+  .ut{left:83.3%;width:12.8%;color:#63368f;background:#f7f0fc}
+
+  @media (max-aspect-ratio: 1/1){
+    .screen{background:#061f3d}
+  }
+</style>
+</head>
+<body>
+<div class="screen">
+  <main class="board" aria-label="Subjail Kannur Lock Up Board">
+    <img src="board-reference.png" alt="Subjail Kannur Lock Up Board design">
+    <div id="date" class="dynamic date-value">12-09-2026</div>
+    <div id="totalUnlock" class="dynamic number total">59</div>
+    <div id="cp" class="dynamic number cp">01</div>
+    <div id="rp" class="dynamic number rp">46</div>
+    <div id="ut" class="dynamic number ut">12</div>
+  </main>
+</div>
+<script>
+(function(){
+  const q = new URLSearchParams(location.search);
+  const value = (key, fallback) => {
+    const v = q.get(key);
+    return v !== null && v.trim() !== '' ? v.trim() : fallback;
+  };
+  document.getElementById('totalUnlock').textContent = value('totalUnlock','59');
+  document.getElementById('cp').textContent = value('cp','01');
+  document.getElementById('rp').textContent = value('rp','46');
+  document.getElementById('ut').textContent = value('ut','12');
+  document.getElementById('date').textContent = value('date','12-09-2026');
+})();
+</script>
+</body>
+</html>
